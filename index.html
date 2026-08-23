@@ -1,406 +1,230 @@
-import { createFileRoute } from "@tanstack/react-router"; 
-import { useRef, useState } from "react";
-import {
-  Instagram,
-  Facebook,
-  Youtube,
-  Music2,
-  Mail,
-  Clock,
-  MapPin,
-  Calendar,
-  ArrowUpRight,
-} from "lucide-react";
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phantom Rebellion | Rock & Instrumental Soundscapes</title>
+  <meta name="description" content="Phantom Rebellion is a rock band crafting dark, cinematic instrumental soundscapes. Catch upcoming shows, book the band, or get in touch for lessons and sync inquiries.">
+  
+  <meta property="og:title" content="Phantom Rebellion | Rock & Instrumental Soundscapes">
+  <meta property="og:description" content="Phantom Rebellion is a rock band crafting dark, cinematic instrumental soundscapes. Catch upcoming shows, book the band, or get in touch for lessons and sync inquiries.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
 
-import birdIcon from "@/assets/phantom-bird-storm-icon.jpg";
-import birdStorm from "@/assets/phantom-bird-storm.jpg";
-import wordmark from "@/assets/phantom-rebellion-wordmark.png";
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: '#09090b',
+            foreground: '#fafafa',
+            card: '#18181b',
+            primary: '#a855f7',
+            'primary-foreground': '#ffffff',
+            border: '#27272a',
+            input: '#27272a'
+          }
+        }
+      }
+    }
+  </script>
 
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Phantom Rebellion | Rock & Instrumental Soundscapes" },
-      {
-        name: "description",
-        content:
-          "Phantom Rebellion is a rock band crafting dark, cinematic instrumental soundscapes. Catch upcoming shows, book the band, or get in touch for lessons and sync inquiries.",
-      },
-      { property: "og:title", content: "Phantom Rebellion | Rock & Instrumental Soundscapes" },
-      {
-        property: "og:description",
-        content:
-          "Phantom Rebellion is a rock band crafting dark, cinematic instrumental soundscapes. Catch upcoming shows, book the band, or get in touch for lessons and sync inquiries.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
-  component: Index,
-});
+  <!-- Lucide Icons via CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    body { background-color: #09090b; color: #fafafa; }
+    .glow-purple { box-shadow: 0 0 20px rgba(168, 85, 247, 0.4); }
+    .hover\:glow-purple:hover { box-shadow: 0 0 25px rgba(168, 85, 247, 0.6); }
+  </style>
+</head>
+<body class="min-h-screen bg-background text-foreground font-sans">
 
-function Index() {
-  const showsRef = useRef<HTMLElement>(null);
-  const contactRef = useRef<HTMLElement>(null);
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 border-b border-border bg-black/95 backdrop-blur-sm">
+    <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <a href="/" class="flex items-center gap-2 transition-opacity hover:opacity-80">
+        <img src="./assets/phantom-bird-storm-icon.jpg" alt="Phantom Rebellion bird emblem" class="h-10 w-10 rounded-md border border-primary/30 object-cover" />
+      </a>
+      <div class="flex items-center gap-8 text-sm font-medium tracking-wide">
+        <a href="#shows" class="text-white/80 transition-colors hover:text-primary">Show</a>
+        <a href="#contact" class="text-white/80 transition-colors hover:text-primary">Contact</a>
+      </div>
+    </nav>
+  </header>
 
-  const scrollTo = (ref: React.RefObject<HTMLElement | null>) => {
-    ref.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  return (
-    <div className="min-h-screen bg-background text-foreground">
-      <Navbar onShowClick={() => scrollTo(showsRef)} onContactClick={() => scrollTo(contactRef)} />
-
-      <main>
-        <Hero onShowClick={() => scrollTo(showsRef)} />
-        <Shows ref={showsRef} />
-        <Contact ref={contactRef} />
-      </main>
-
-      <Footer />
-    </div>
-  );
-}
-
-function Navbar({
-  onShowClick,
-  onContactClick,
-}: {
-  onShowClick: () => void;
-  onContactClick: () => void;
-}) {
-  return (
-    <header className="sticky top-0 z-50 border-b border-border bg-black/95 backdrop-blur-sm">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="/" className="flex items-center gap-2 transition-opacity hover:opacity-80">
-          <img
-            src={birdIcon}
-            alt="Phantom Rebellion bird emblem"
-            width={40}
-            height={40}
-            className="h-10 w-10 rounded-md border border-primary/30 object-cover"
-          />
-        </a>
-
-        <div className="flex items-center gap-8 text-sm font-medium tracking-wide">
-          <button
-            onClick={onShowClick}
-            className="text-white/80 transition-colors hover:text-primary"
-          >
-            Show
-          </button>
-          <button
-            onClick={onContactClick}
-            className="text-white/80 transition-colors hover:text-primary"
-          >
-            Contact
-          </button>
+  <main>
+    <!-- Hero Section -->
+    <section class="relative flex flex-col items-center justify-center px-6 py-24 md:py-32">
+      <div class="relative z-10 flex max-w-4xl flex-col items-center text-center">
+        <div class="relative w-full max-w-3xl overflow-hidden rounded-2xl border border-primary/30 glow-purple">
+          <img src="./assets/phantom-bird-storm.jpg" alt="Phantom Rebellion owl emblem against a moonlit storm sky" class="w-full" />
+          <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80"></div>
         </div>
-      </nav>
-    </header>
-  );
-}
-
-function Hero({ onShowClick }: { onShowClick: () => void }) {
-  return (
-    <section className="relative flex flex-col items-center justify-center px-6 py-24 md:py-32">
-      <div className="relative z-10 flex max-w-4xl flex-col items-center text-center">
-        <div className="relative w-full max-w-3xl overflow-hidden rounded-2xl border border-primary/30 glow-purple">
-          <img
-            src={birdStorm}
-            alt="Phantom Rebellion owl emblem against a moonlit storm sky"
-            width={1536}
-            height={1024}
-            className="w-full"
-          />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80" />
-        </div>
-        <img
-          src={wordmark}
-          alt="Phantom Rebellion"
-          width={968}
-          height={256}
-          className="mt-8 w-full max-w-xl"
-        />
-        <p className="mt-8 text-lg font-medium tracking-wide text-white/80 md:text-xl">
-          Rock & Instrumental Soundscapes
-        </p>
-        <button
-          onClick={onShowClick}
-          className="mt-10 inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3.5 text-sm font-semibold tracking-wide text-primary-foreground transition-all hover:bg-primary/90 hover:glow-purple"
-        >
+        <img src="./assets/phantom-rebellion-wordmark.png" alt="Phantom Rebellion" class="mt-8 w-full max-w-xl" />
+        <p class="mt-8 text-lg font-medium tracking-wide text-white/80 md:text-xl">Rock & Instrumental Soundscapes</p>
+        <a href="#shows" class="mt-10 inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3.5 text-sm font-semibold tracking-wide text-primary-foreground transition-all hover:bg-primary/90 hover:glow-purple">
           Upcoming Shows
-          <ArrowUpRight className="h-4 w-4" />
-        </button>
+          <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+        </a>
       </div>
     </section>
-  );
-}
 
-const Shows = ({ ref }: { ref: React.RefObject<HTMLElement | null> }) => {
-  return (
-    <section ref={ref} className="px-6 py-20 md:py-28">
-      <div className="mx-auto max-w-5xl">
-        <h2 className="mb-10 text-center text-3xl font-bold tracking-tight text-white md:text-4xl">
-          Upcoming Shows
-        </h2>
-
-        <div className="show-card group relative overflow-hidden rounded-2xl bg-card p-8 md:p-12">
-          <div className="absolute inset-0 rounded-2xl border border-purple/30 opacity-60 transition-all duration-500 group-hover:border-purple/60 group-hover:opacity-100" />
-          <div className="absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100 glow-purple pointer-events-none" />
-
-          <div className="relative z-10 flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
-            <div className="flex-1">
-              <div className="inline-flex items-center gap-2 rounded-full border border-purple/40 bg-purple/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
-                <Music2 className="h-3.5 w-3.5" />
-                Featured Event
+    <!-- Shows Section -->
+    <section id="shows" class="px-6 py-20 md:py-28">
+      <div class="mx-auto max-w-5xl">
+        <h2 class="mb-10 text-center text-3xl font-bold tracking-tight text-white md:text-4xl">Upcoming Shows</h2>
+        
+        <div class="group relative overflow-hidden rounded-2xl bg-card p-8 md:p-12">
+          <div class="absolute inset-0 rounded-2xl border border-purple-500/30 opacity-60 transition-all duration-500 group-hover:border-purple-500/60 group-hover:opacity-100"></div>
+          
+          <div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+            <div class="flex-1">
+              <div class="inline-flex items-center gap-2 rounded-full border border-purple-500/40 bg-purple-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
+                <i data-lucide="music-2" class="h-3.5 w-3.5"></i> Featured Event
               </div>
-              <h3 className="mt-5 text-2xl font-bold leading-tight text-white md:text-3xl">
-                Frank Finesse Presents: Trill Ride Pt. 2
-              </h3>
-
-              <div className="mt-6 grid gap-4 sm:grid-cols-3">
-                <div className="flex items-start gap-3">
-                  <Calendar className="mt-0.5 h-5 w-5 text-primary" />
+              <h3 class="mt-5 text-2xl font-bold leading-tight text-white md:text-3xl">Frank Finesse Presents: Trill Ride Pt. 2</h3>
+              
+              <div class="mt-6 grid gap-4 sm:grid-cols-3">
+                <div class="flex items-start gap-3">
+                  <i data-lucide="calendar" class="mt-0.5 h-5 w-5 text-primary"></i>
                   <div>
-                    <p className="text-sm font-semibold text-white">Date</p>
-                    <p className="text-sm text-white/70">Friday August 28, 2026</p>
+                    <p class="text-sm font-semibold text-white">Date</p>
+                    <p class="text-sm text-white/70">Friday August 28, 2026</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <Clock className="mt-0.5 h-5 w-5 text-primary" />
+                <div class="flex items-start gap-3">
+                  <i data-lucide="clock" class="mt-0.5 h-5 w-5 text-primary"></i>
                   <div>
-                    <p className="text-sm font-semibold text-white">Time</p>
-                    <p className="text-sm text-white/70">9:00P.M.</p>
+                    <p class="text-sm font-semibold text-white">Time</p>
+                    <p class="text-sm text-white/70">9:00P.M.</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <MapPin className="mt-0.5 h-5 w-5 text-primary" />
+                <div class="flex items-start gap-3">
+                  <i data-lucide="map-pin" class="mt-0.5 h-5 w-5 text-primary"></i>
                   <div>
-                    <p className="text-sm font-semibold text-white">Venue</p>
-                    <p className="text-sm text-white/70">Lafayette, LA</p>
+                    <p class="text-sm font-semibold text-white">Venue</p>
+                    <p class="text-sm text-white/70">Lafayette, LA</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <a
-              href="https://www.lafayettetravel.com/event/frank-finesse-presents%3A-trill-ride-pt-2/48715/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-primary bg-transparent px-6 py-3 text-sm font-semibold text-primary transition-all hover:bg-primary hover:text-primary-foreground"
-            >
+            <a href="https://www.lafayettetravel.com/event/frank-finesse-presents%3A-trill-ride-pt-2/48715/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 rounded-full border border-primary bg-transparent px-6 py-3 text-sm font-semibold text-primary transition-all hover:bg-primary hover:text-primary-foreground">
               View Official Event Details
-              <ArrowUpRight className="h-4 w-4" />
+              <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
             </a>
           </div>
         </div>
       </div>
     </section>
-  );
-};
 
-const Contact = ({ ref }: { ref: React.RefObject<HTMLElement | null> }) => {
-  const [formState, setFormState] = useState({
-    name: "",
-    email: "",
-    type: "",
-    message: "",
-  });
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formState.name && formState.email && formState.type && formState.message) {
-      setSubmitted(true);
-    }
-  };
-
-  return (
-    <section ref={ref} className="px-6 py-20 md:py-28">
-      <div className="mx-auto max-w-5xl">
-        <h2 className="mb-10 text-center text-3xl font-bold tracking-tight text-white md:text-4xl">
-          Get in Touch
-        </h2>
-
-        <div className="grid gap-8 lg:grid-cols-2">
-          <div className="space-y-6">
-            <div className="rounded-2xl bg-card p-6 transition-all duration-300 hover:border-glow">
-              <h3 className="text-lg font-semibold text-white">Private Lessons & Instruction</h3>
-              <p className="mt-2 text-sm leading-relaxed text-white/70">
-                All skill levels welcome. One-on-one coaching for guitar, performance, and
-                songwriting.
-              </p>
+    <!-- Contact Section -->
+    <section id="contact" class="px-6 py-20 md:py-28">
+      <div class="mx-auto max-w-5xl">
+        <h2 class="mb-10 text-center text-3xl font-bold tracking-tight text-white md:text-4xl">Get in Touch</h2>
+        
+        <div class="grid gap-8 lg:grid-cols-2">
+          <div class="space-y-6">
+            <div class="rounded-2xl bg-card p-6 transition-all duration-300">
+              <h3 class="text-lg font-semibold text-white">Private Lessons & Instruction</h3>
+              <p class="mt-2 text-sm leading-relaxed text-white/70">All skill levels welcome. One-on-one coaching for guitar, performance, and songwriting.</p>
             </div>
 
-            <div className="rounded-2xl bg-card p-6 transition-all duration-300 hover:border-glow">
-              <h3 className="text-lg font-semibold text-white">
-                Sync, Booking & General Inquiries
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-white/70">
-                Licensing, live bookings, press, collaborations, and everything else.
-              </p>
+            <div class="rounded-2xl bg-card p-6 transition-all duration-300">
+              <h3 class="text-lg font-semibold text-white">Sync, Booking & General Inquiries</h3>
+              <p class="mt-2 text-sm leading-relaxed text-white/70">Licensing, live bookings, press, collaborations, and everything else.</p>
             </div>
 
-            <div className="flex items-center gap-3 rounded-2xl bg-card p-6">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
-                <Mail className="h-5 w-5 text-primary" />
+            <div class="flex flex-col gap-4 rounded-2xl bg-card p-6">
+              <div class="flex items-center gap-3">
+                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                  <i data-lucide="mail" class="h-5 w-5 text-primary"></i>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-white">Frank Finesse</p>
+                  <p class="text-sm text-primary">frank@phantomrebellion.band</p>
+                </div>
               </div>
-              <div>
-                <p className="text-sm font-semibold text-white">Frank Finesse</p>
-                <p className="text-sm text-primary">frank@phantomrebellion.band</p>
+              <div class="flex items-center gap-3">
+                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                  <i data-lucide="mail" class="h-5 w-5 text-primary"></i>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-white">Jean Luc</p>
+                  <p class="text-sm text-primary">jeanluc@phantomrebellion.band</p>
+                </div>
               </div>
-			                <div>
-                <p className="text-sm font-semibold text-white">Jean Luc</p>
-                <p className="text-sm text-primary">jeanluc@phantomrebellion.band</p>
-              </div>
-			                <div>
-                <p className="text-sm font-semibold text-white">Kentayjus</p>
-                <p className="text-sm text-primary">kentayjus@gmail.com</p>
+              <div class="flex items-center gap-3">
+                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                  <i data-lucide="mail" class="h-5 w-5 text-primary"></i>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-white">Kentayjus</p>
+                  <p class="text-sm text-primary">kentayjus@gmail.com</p>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="rounded-2xl bg-card p-6 md:p-8">
-            {submitted ? (
-              <div className="flex h-full flex-col items-center justify-center text-center">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                  <Mail className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="mt-4 text-lg font-semibold text-white">Message sent</h3>
-                <p className="mt-2 text-sm text-white/70">
-                  Thanks for reaching out. We&apos;ll get back to you soon.
-                </p>
+          <div class="rounded-2xl bg-card p-6 md:p-8">
+            <form onsubmit="event.preventDefault(); alert('Message feature requires a backend server to send emails. For now, please use the email addresses provided directly.');" class="space-y-5">
+              <div>
+                <label for="name" class="mb-2 block text-sm font-medium text-white">Name</label>
+                <input id="name" type="text" required class="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Your name">
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div>
-                  <label htmlFor="name" className="mb-2 block text-sm font-medium text-white">
-                    Name
-                  </label>
-                  <input
-                    id="name"
-                    type="text"
-                    required
-                    value={formState.name}
-                    onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                    className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                    placeholder="Your name"
-                  />
-                </div>
 
-                <div>
-                  <label htmlFor="email" className="mb-2 block text-sm font-medium text-white">
-                    Email
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    required
-                    value={formState.email}
-                    onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                    className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                    placeholder="you@example.com"
-                  />
-                </div>
+              <div>
+                <label for="email" class="mb-2 block text-sm font-medium text-white">Email</label>
+                <input id="email" type="email" required class="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" placeholder="you@example.com">
+              </div>
 
-                <div>
-                  <label htmlFor="type" className="mb-2 block text-sm font-medium text-white">
-                    Inquiry Type
-                  </label>
-                  <select
-                    id="type"
-                    required
-                    value={formState.type}
-                    onChange={(e) => setFormState({ ...formState, type: e.target.value })}
-                    className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm text-white focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary [&>option]:bg-card"
-                  >
-                    <option value="" disabled>
-                      Select an option
-                    </option>
-                    <option value="lessons">Private Lessons & Instruction</option>
-                    <option value="booking">Booking</option>
-                    <option value="sync">Sync & Licensing</option>
-                    <option value="general">General Inquiry</option>
-                  </select>
-                </div>
+              <div>
+                <label for="type" class="mb-2 block text-sm font-medium text-white">Inquiry Type</label>
+                <select id="type" required class="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm text-white focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
+                  <option value="" disabled selected>Select an option</option>
+                  <option value="lessons">Private Lessons & Instruction</option>
+                  <option value="booking">Booking</option>
+                  <option value="sync">Sync & Licensing</option>
+                  <option value="general">General Inquiry</option>
+                </select>
+              </div>
 
-                <div>
-                  <label htmlFor="message" className="mb-2 block text-sm font-medium text-white">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    required
-                    rows={5}
-                    value={formState.message}
-                    onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                    className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                    placeholder="Tell us what you need..."
-                  />
-                </div>
+              <div>
+                <label for="message" class="mb-2 block text-sm font-medium text-white">Message</label>
+                <textarea id="message" required rows="5" class="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Tell us what you need..."></textarea>
+              </div>
 
-                <button
-                  type="submit"
-                  className="w-full rounded-lg bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 hover:glow-purple"
-                >
-                  Send Message
-                </button>
-              </form>
-            )}
+              <button type="submit" class="w-full rounded-lg bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 hover:glow-purple">
+                Send Message
+              </button>
+            </form>
           </div>
         </div>
       </div>
     </section>
-  );
-};
+  </main>
 
-function Footer() {
-  return (
-    <footer className="border-t border-border bg-black px-6 py-12">
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-6">
-        <img
-          src={birdIcon}
-          alt="Phantom Rebellion"
-          width={48}
-          height={48}
-          className="h-12 w-12 rounded-md border border-primary/25 object-cover opacity-90"
-          loading="lazy"
-        />
-
-        <div className="flex items-center gap-6">
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white/60 transition-colors hover:text-primary"
-            aria-label="Instagram"
-          >
-            <Instagram className="h-5 w-5" />
-          </a>
-          <a
-            href="https://facebook.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white/60 transition-colors hover:text-primary"
-            aria-label="Facebook"
-          >
-            <Facebook className="h-5 w-5" />
-          </a>
-          <a
-            href="https://youtube.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white/60 transition-colors hover:text-primary"
-            aria-label="YouTube"
-          >
-            <Youtube className="h-5 w-5" />
-          </a>
-        </div>
-
-        <p className="text-sm text-white/50">
-          © {new Date().getFullYear()} Phantom Rebellion. All rights reserved.
-        </p>
+  <!-- Footer -->
+  <footer class="border-t border-border bg-black px-6 py-12">
+    <div class="mx-auto flex max-w-6xl flex-col items-center gap-6">
+      <img src="./assets/phantom-bird-storm-icon.jpg" alt="Phantom Rebellion" class="h-12 w-12 rounded-md border border-primary/25 object-cover opacity-90" loading="lazy" />
+      
+      <div class="flex items-center gap-6">
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="text-white/60 transition-colors hover:text-primary"><i data-lucide="instagram" class="h-5 w-5"></i></a>
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="text-white/60 transition-colors hover:text-primary"><i data-lucide="facebook" class="h-5 w-5"></i></a>
+        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="text-white/60 transition-colors hover:text-primary"><i data-lucide="youtube" class="h-5 w-5"></i></a>
       </div>
-    </footer>
-  );
-}
+
+      <p class="text-sm text-white/50">© 2026 Phantom Rebellion. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+  </script>
+</body>
+</html>
